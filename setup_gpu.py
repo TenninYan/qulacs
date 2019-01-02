@@ -1,5 +1,3 @@
-
-
 import os
 import re
 import sys
@@ -9,7 +7,6 @@ import subprocess
 from setuptools import setup, find_packages, Extension
 from setuptools.command.build_ext import build_ext
 from distutils.version import LooseVersion
-
 
 class CMakeExtension(Extension):
     def __init__(self, name, sourcedir=''):
@@ -75,8 +72,8 @@ class CMakeBuild(build_ext):
         subprocess.check_call(['cmake', '--build', '.', '--target', 'python'] + build_args, cwd=self.build_temp)
 
 setup(
-    name='Qulacs',
-    version='0.0.4',
+    name='Qulacs-GPU',
+    version='0.1.0b',
     author='QunaSys',
     author_email='qulacs@qunasys.com',
     url='http://www.qulacs.org',

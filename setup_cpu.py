@@ -1,3 +1,5 @@
+
+
 import os
 import re
 import sys
@@ -7,6 +9,7 @@ import subprocess
 from setuptools import setup, find_packages, Extension
 from setuptools.command.build_ext import build_ext
 from distutils.version import LooseVersion
+
 
 class CMakeExtension(Extension):
     def __init__(self, name, sourcedir=''):
@@ -59,8 +62,8 @@ class CMakeBuild(build_ext):
                 cmake_args += ['-DCMAKE_CXX_COMPILER=g++']
             else:
                 cmake_args += ['-DCMAKE_CXX_COMPILER=g++-7']
+
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
-            cmake_args += ['-DUSE_GPU:STR=Yes']
             build_args += ['--', '-j2']
 
         env = os.environ.copy()
@@ -72,8 +75,8 @@ class CMakeBuild(build_ext):
         subprocess.check_call(['cmake', '--build', '.', '--target', 'python'] + build_args, cwd=self.build_temp)
 
 setup(
-    name='Qulacs-GPU',
-    version='0.1.0b',
+    name='Qulacs',
+    version='0.0.4',
     author='QunaSys',
     author_email='qulacs@qunasys.com',
     url='http://www.qulacs.org',
