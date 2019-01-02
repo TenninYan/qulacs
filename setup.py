@@ -10,7 +10,12 @@ from distutils.version import LooseVersion
 
 _VERSION = '0.1.0a'
 
+USE_GPU = False
 project_name = 'Qulacs'
+if '--gpu' in sys.argv:
+    project_name = 'Qulacs-GPU'
+    USE_GPU = True
+    sys.argv.remove('--gpu')
 
 class CMakeExtension(Extension):
     def __init__(self, name, sourcedir=''):
@@ -65,9 +70,8 @@ class CMakeBuild(build_ext):
                 cmake_args += ['-DCMAKE_CXX_COMPILER=g++-7']
 
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
-            if "-gpu" in sys.argv:
+            if USE_GPU:
                 cmake_args += ['-DUSE_GPU:STR=Yes']
-                project_name = 'Qulacs-GPU'
 
             build_args += ['--', '-j2']
 
